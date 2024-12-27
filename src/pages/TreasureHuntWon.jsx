@@ -14,12 +14,10 @@ const TreasureHuntWon = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-500 via-teal-400 to-green-700 flex flex-col items-center justify-center text-white">
-      {/* Header */}
       <h1 className="text-6xl font-bold text-center animate-bounce">
-        🎉 Congratulations! 🎉
+        🎉 Congratulations!
       </h1>
 
-      {/* Subheading */}
       <p className="text-xl mt-4 text-center max-w-lg">
         You’ve successfully completed the Treasure Hunt and discovered the
         hidden treasure! Your skills, determination, and wits have led you to

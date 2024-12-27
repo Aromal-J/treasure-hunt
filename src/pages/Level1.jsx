@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import Level1Modal from '../modals/Level1Modal'
+import Level1Modal from "../modals/Level1Modal";
 const Level1 = () => {
   const [answer, setAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
   const [isCorrect, setIsCorrect] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (answer.trim() === "") {
@@ -68,8 +69,8 @@ const Level1 = () => {
           </button>
         </form>
       </div>
-            {showModal && (
-        <Level1Modal message="For the next level, give level2 instead of 1." />
+      {showModal && (
+        <Level1Modal message="Look around!!, instead of level-1 give 2." />
       )}
     </div>
   );
