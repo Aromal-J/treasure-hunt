@@ -7,14 +7,12 @@ function App() {
 
   return (
     <>
-    <Router>
       <Routes>
         <Route
-          path="/team-name/level-1/:id"
+          path="/:team-name/login"
           element={<Login />}
         />
       </Routes>
-    </Router>
     </>
   )
 }

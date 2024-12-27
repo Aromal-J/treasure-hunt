@@ -35,12 +35,17 @@
 // export default Login;
 
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 
 const Login = () => {
   const [buttonPosition, setButtonPosition] = useState({
     top: "62%",
     left: "46%",
   });
+
+  const id = useParams();
+  console.log(id);
+  
 
   const moveButton = () => {
     const randomTop = Math.random() * 80 + 10; // Random value between 10% and 90%
