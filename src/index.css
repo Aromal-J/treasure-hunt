@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  background: transparent;
+  font-weight: normal;
+  text-decoration: none;
+  outline: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+ol,
+ul {
+  list-style: none !important;
+}
+
+del {
+  text-decoration: line-through;
+}
+
+body {
+  font-family: "InterRegular", Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  color: #000;
+  overflow-x: hidden;
+  min-width: 320px;
+  font-weight: 500;
+}
+
+input,
+textarea,
+select {
+  font-family: "InterRegular", Arial, Helvetica, sans-serif;
+  font-weight: 500;
+}
+
+.thumb {
+  display: block;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+a {
+  cursor: pointer;
+}
+
+.wrapper {
+  width: 90%;
+  margin: 0 auto;
+}
