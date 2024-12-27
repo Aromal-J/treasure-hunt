@@ -1,6 +1,6 @@
 // import React, { useState } from "react";
 
-// const Home = () => {
+// const Login = () => {
 //     const [isHovered, setIsHovered] = useState(false);
 
 //     const handleMouseEnter = () => {
@@ -32,11 +32,11 @@
 //   );
 // };
 
-// export default Home;
+// export default Login;
 
 import React, { useState } from "react";
 
-const Home = () => {
+const Login = () => {
   const [buttonPosition, setButtonPosition] = useState({
     top: "62%",
     left: "46%",
@@ -94,4 +94,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Login;
