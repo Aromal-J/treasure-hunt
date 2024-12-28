@@ -26,7 +26,7 @@ const SignUp = () => {
 
     try {
       const response = await axios.post(
-        "https://shameemmuhammed.pythonanywhere.com/api/v1/users/signup/",
+        "https://ipme6pm9jh.ap-south-1.awsapprunner.com/api/v1/users/signup/",
         payload,
         {
           headers: {
@@ -39,7 +39,7 @@ const SignUp = () => {
         setMessage("🎉 Signup successful! Welcome to the Hunt!");
         updateUser(response.data);
         console.log(response.data);
-        
+
         const { team_name, team_unique_id } = response.data.data;
         navigate(`/${team_name}/level-1/${team_unique_id}`);
       } else {
@@ -98,15 +98,13 @@ const SignUp = () => {
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="current-password"
             />
-            {!showLoginButton && (
-              <button
-                type="submit"
-                className="bg-[#059664] text-white font-semibold rounded-md px-12 py-2 shadow-md hover:shadow-lg transition-all"
-                disabled={loading}
-              >
-                {loading ? "Signing up..." : "Enter"}
-              </button>
-            )}
+            <button
+              type="submit"
+              className="bg-[#059664] text-white font-semibold rounded-md px-12 py-2 shadow-md hover:shadow-lg transition-all"
+              disabled={loading}
+            >
+              {loading ? "Signing up..." : "Enter"}
+            </button>
           </form>
         </div>
         {message && (

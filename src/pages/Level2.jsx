@@ -1,38 +1,103 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import Level1Modal from "../modals/Level1Modal";
 
 const Level2 = () => {
+  const { userData } = useContext(AuthContext);
+
   const [answer, setAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
   const [isCorrect, setIsCorrect] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const {id, "team-name":teamName} = useParams()
+  const [loading, setLoading] = useState(false);
+  const [loadingCorrectAns, setLoadingCorrectAns] = useState(false);
+  const [questionData, setQuestionData] = useState(null);
+  const [correctAns, setCorrectAns] = useState(null);
 
-  console.log(`/${id}/level-three/${teamName}`);
-  
+  const { id, "team-name": teamName } = useParams();
 
+  if (showModal) {
+    console.log(`/${id}/level-three/${teamName}`);
+  }
 
   const binaryString =
     "01001111 01110000 01100101 01101110 01010011 01010011 01001100";
 
   document.cookie = `myBinaryCookie=${binaryString}; path=/; expires=Fri, 31 Dec 2024 23:59:59 GMT`;
 
+  const fetchQuestion = async () => {
+    setLoading(true);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (answer.trim() === "") {
-      setFeedback("Please provide an answer!");
-      setIsCorrect(false);
-    } else {
-      const correct = answer.trim().toLowerCase() === "correctanswer";
-      setIsCorrect(correct);
-      if (correct) {
-        setShowModal(true);
-      } else {
-        setFeedback("❌ Try again!");
-      }
+    try {
+      const response = await axios.get(
+        "https://ipme6pm9jh.ap-south-1.awsapprunner.com/api/v1/hunts/user-question/",
+        {
+          headers: {
+            Authorization: `Bearer ${userData.data.tokens.access}`,
+          },
+        }
+      );
+
+      const {
+        data: { description, attachment, is_last_question, order, title },
+      } = response.data;
+
+      setQuestionData({
+        description,
+        attachment,
+        is_last_question,
+        order,
+        title,
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
+
+  const checkAnswer = async (e) => {
+    e.preventDefault();
+    setLoadingCorrectAns(true);
+
+    try {
+      const payload = { answer };
+      console.log(payload);
+
+      const response = await axios.post(
+        "https://ipme6pm9jh.ap-south-1.awsapprunner.com/api/v1/hunts/validate-user-question/",
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${userData.data.tokens.access}`,
+          },
+        }
+      );
+
+      console.log(response);
+
+      if (response.data.status_code === 6000) {
+        setIsCorrect(true);
+        setShowModal(true);
+        setFeedback("Correct answer!");
+      } else {
+        setIsCorrect(false);
+        setFeedback("❌ Incorrect answer. Try again!");
+      }
+    } catch (error) {
+      console.error("Error submitting answer:", error);
+      setFeedback("❌ Something went wrong. Please try again later.");
+    } finally {
+      setLoadingCorrectAns(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchQuestion();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-500 via-teal-500 to-green-500 text-white">
       {/* Header */}
@@ -45,19 +110,19 @@ const Level2 = () => {
         }}
       >
         <h1 className="text-5xl font-bold mb-6 text-center">
-          🧠 Level 2: The Challenge Begins!
+          {loading
+            ? "Loading..."
+            : `   🧠 Level ${questionData?.order}: ${questionData?.title}`}
         </h1>
 
         {/* Question Card */}
         <div className="bg-white text-gray-800 rounded-lg shadow-lg p-6 w-full max-w-3xl">
           <p className="text-lg">
-            It is typically used for remembering stateful information about the
-            user, such as login status, preferences, or tracking information
-            across sessions.{" "}
+            {loading ? "Loading..." : `${questionData?.description}`}
           </p>
 
           {/* Answer Form */}
-          <form onSubmit={handleSubmit} className="flex flex-col mt-6 gap-4">
+          <form onSubmit={checkAnswer} className="flex flex-col mt-6 gap-4">
             <div className="flex flex-col gap-1">
               <input
                 type="text"
@@ -92,9 +157,7 @@ const Level2 = () => {
         </div>
       </div>
       <div></div>
-      {showModal && (
-        <Level1Modal message="Check the Output" />
-      )}
+      {showModal && <Level1Modal message="Check the Output" />}
     </div>
   );
 };
