@@ -12,6 +12,21 @@ const SignUp = () => {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [showLoginButton, setShowLoginButton] = useState(false);
+    const [buttonPosition, setButtonPosition] = useState({
+      top: "64%",
+      left: "44%",
+    });
+  
+
+  const moveButton = () => {
+    const randomTop = Math.random() * 80 + 10; // Random value between 10% and 90%
+    const randomLeft = Math.random() * 80 + 10; // Random value between 10% and 90%
+    setButtonPosition({
+      top: `${randomTop}%`,
+      left: `${randomLeft}%`,
+    });
+  };
+
 
   const handleClick = async () => {
     setLoading(true);
@@ -102,6 +117,14 @@ const SignUp = () => {
               type="submit"
               className="bg-[#059664] text-white font-semibold rounded-md px-12 py-2 shadow-md hover:shadow-lg transition-all"
               disabled={loading}
+              style={{
+                position: "absolute",
+                top: buttonPosition.top,
+                left: buttonPosition.left,
+              }}
+              onMouseEnter={moveButton}
+
+  
             >
               {loading ? "Signing up..." : "Enter"}
             </button>
