@@ -64,7 +64,6 @@ const Level2 = () => {
 
     try {
       const payload = { answer };
-      console.log(payload);
 
       const response = await axios.post(
         "https://shameemmuhammed.pythonanywhere.com/api/v1/hunts/validate-user-question/",

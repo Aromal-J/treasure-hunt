@@ -67,7 +67,6 @@ const Level1 = () => {
 
     try {
       const payload = { answer };
-      console.log(payload);
 
       const response = await axios.post(
         "https://shameemmuhammed.pythonanywhere.com/api/v1/hunts/validate-user-question/",
@@ -79,7 +78,6 @@ const Level1 = () => {
         }
       );
 
-      console.log(response);
 
       if (response.data.status_code === 6000) {
         setIsCorrect(true);
