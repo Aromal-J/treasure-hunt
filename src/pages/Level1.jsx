@@ -35,7 +35,7 @@ const Level1 = () => {
 
     try {
       const response = await axios.get(
-        "https://ipme6pm9jh.ap-south-1.awsapprunner.com/api/v1/hunts/user-question/",
+        "https://shameemmuhammed.pythonanywhere.com/api/v1/hunts/user-question/",
         {
           headers: {
             Authorization: `Bearer ${userData.data.tokens.access}`,
@@ -70,7 +70,7 @@ const Level1 = () => {
       console.log(payload);
 
       const response = await axios.post(
-        "https://ipme6pm9jh.ap-south-1.awsapprunner.com/api/v1/hunts/validate-user-question/",
+        "https://shameemmuhammed.pythonanywhere.com/api/v1/hunts/validate-user-question/",
         payload,
         {
           headers: {

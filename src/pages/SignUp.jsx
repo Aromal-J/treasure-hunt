@@ -26,7 +26,7 @@ const SignUp = () => {
 
     try {
       const response = await axios.post(
-        "https://ipme6pm9jh.ap-south-1.awsapprunner.com/api/v1/users/signup/",
+        "https://shameemmuhammed.pythonanywhere.com/api/v1/users/signup/",
         payload,
         {
           headers: {

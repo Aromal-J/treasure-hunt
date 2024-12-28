@@ -15,12 +15,16 @@ const Level3 = () => {
   const [questionData, setQuestionData] = useState(null);
   const [correctAns, setCorrectAns] = useState(null);
 
+  const storeURLtolocalStorage = (url) => {
+    localStorage.setItem("URL", url);
+  };
+
   const fetchQuestion = async () => {
     setLoading(true);
 
     try {
       const response = await axios.get(
-        "https://ipme6pm9jh.ap-south-1.awsapprunner.com/api/v1/hunts/user-question/",
+        "https://shameemmuhammed.pythonanywhere.com/api/v1/hunts/user-question/",
         {
           headers: {
             Authorization: `Bearer ${userData.data.tokens.access}`,
@@ -55,7 +59,7 @@ const Level3 = () => {
       console.log(payload);
 
       const response = await axios.post(
-        "https://ipme6pm9jh.ap-south-1.awsapprunner.com/api/v1/hunts/validate-user-question/",
+        "https://shameemmuhammed.pythonanywhere.com/api/v1/hunts/validate-user-question/",
         payload,
         {
           headers: {
@@ -84,6 +88,9 @@ const Level3 = () => {
 
   useEffect(() => {
     fetchQuestion();
+    storeURLtolocalStorage(
+      "https://stylesuxx.github.io/steganography/?utm_source=chatgpt.com"
+    );
   }, []);
 
   return (
@@ -102,11 +109,15 @@ const Level3 = () => {
         </p>
 
         <div className="mb-6">
-          <img
-            src={attachment}
-            alt="Steganography"
-            className="max-w-full h-auto rounded-md shadow-lg"
-          />
+          {loading ? (
+            "Loading..."
+          ) : (
+            <img
+              src={questionData?.attachment}
+              alt="Steganography"
+              className="max-w-full max-h-72 rounded-md shadow-lg object-contain"
+            />
+          )}
         </div>
 
         {/* Answer Form */}
@@ -144,7 +155,9 @@ const Level3 = () => {
         </form>
       </div>
       {showModal && (
-        <Level1Modal message="You now have:- U2FsdGVkX1+JFWh+EZu+sSeZrRjhJzG2Ve5wPZ2r+IGNtZWb8Pc4GjBVCyYSeOEf openSSL and Hackathon@5.0 " />
+        <Level1Modal
+          message={`You now have:\nU2FsdGVkX1+JFWh+EZu+sSeZrRjhJzG2Ve5wPZ2r+\nIGNtZWb8Pc4GjBVCyYSeOEf\nopenSSL\nHackathon@5.0`}
+        />
       )}
     </div>
   );
