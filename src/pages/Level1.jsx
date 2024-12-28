@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Level1Modal from "../modals/Level1Modal";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
+import { useParams } from "react-router-dom";
 
 const Level1 = () => {
   const { userData } = useContext(AuthContext);
@@ -13,6 +14,7 @@ const Level1 = () => {
   const [loadingCorrectAns, setLoadingCorrectAns] = useState(false);
   const [questionData, setQuestionData] = useState(null);
   const [correctAns, setCorrectAns] = useState(null);
+  const params = useParams()
 
   // const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -77,7 +79,6 @@ const Level1 = () => {
           },
         }
       );
-
 
       if (response.data.status_code === 6000) {
         setIsCorrect(true);

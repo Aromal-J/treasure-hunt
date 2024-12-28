@@ -83,10 +83,15 @@ const SignUp = () => {
 
         <div className="flex flex-col gap-3">
           <form
-            onSubmit={(e) => {
-              e.preventDefault(); // Prevent the default form submission
-              handleClick(); // Call the handleClick function
-            }}
+            // onSubmit={(e) => {
+            //   e.preventDefault(); // Prevent the default form submission
+            //   handleClick(); // Call the handleClick function
+            // }}
+            onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault(); // Prevent form submission when Enter is pressed
+                }
+              }}
             className="flex flex-col gap-3"
           >
             <input
@@ -114,7 +119,8 @@ const SignUp = () => {
               autoComplete="current-password"
             />
             <button
-              type="submit"
+            //   type="submit"
+            onClick={handleClick}
               className="bg-[#059664] text-white font-semibold rounded-md px-12 py-2 shadow-md hover:shadow-lg transition-all"
               disabled={loading}
               style={{

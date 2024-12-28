@@ -154,7 +154,7 @@ const Level3 = () => {
       </div>
       {showModal && (
         <Level1Modal
-          message={`You now have:\nU2FsdGVkX1+JFWh+EZu+sSeZrRjhJzG2Ve5wPZ2r+\nIGNtZWb8Pc4GjBVCyYSeOEf\nopenSSL\nHackathon@5.0`}
+          message={`You now have:\nU2FsdGVkX1+JFWh+EZu+sSeZrRjhJzG2Ve5wPZ2r+\nIGNtZWb8Pc4GjBVCyYSeOEf\nopenSSL\nHackathon@5.0\nOne more step to go...`}
         />
       )}
     </div>
